@@ -114,6 +114,7 @@ public class AtividadePerguntas extends AppCompatActivity {
         } else {
             dificuldade = "fácil";
         }
+        Log.d("AtividadePerguntas", "nivel no o carregar: "+nivelAtual);
 
         Cursor resultadoColuna = BD_LP.obterPerguntaAleatoria(dificuldade);
 
@@ -146,10 +147,16 @@ public class AtividadePerguntas extends AppCompatActivity {
         if (respostaEscolhida.equals(respostaCorreta)) {
             // Incrementar o nível
             nivelAtual++;
-            // Se o nível for 5 ou mais, redireciona para a AtividadeStatus
-            Intent intent = new Intent(AtividadePerguntas.this, AtividadeStatus.class);
-            intent.putExtra("nivelAtual", nivelAtual); // Passar o nível atual
-            startActivity(intent);
+
+            // Verificar se o nível atingiu ou superou 5
+            if (nivelAtual >= 5) {
+                // Se o nível for 5 ou mais, redireciona para a AtividadeStatus
+                Intent intent = new Intent(AtividadePerguntas.this, AtividadeStatus.class);
+                startActivity(intent);
+            } else {
+                // Caso o nível ainda não seja 5, carrega a próxima pergunta
+                carregarPergunta();
+            }
         } else {
             // Se a resposta estiver errada, reseta a visualização
             BD_LP.resetarVisualizada();

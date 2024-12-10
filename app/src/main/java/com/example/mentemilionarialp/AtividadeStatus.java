@@ -26,17 +26,10 @@ public class AtividadeStatus extends AppCompatActivity {
         });
 
 
-        /*
-        Bundle extras = getIntent().getExtras();
-        String nivelAtualRecebido = extras.getString("nivelAtual");
-        int nivelAtual = Integer.parseInt(nivelAtualRecebido);
-        Log.d("AtividadeStatus", "Nivel no status: "+nivelAtual);
-        */
 
         // Agora, vamos voltar para a próxima pergunta depois de 3 segundos
         new android.os.Handler().postDelayed(() -> {
             Intent intent = new Intent(AtividadeStatus.this, AtividadePerguntas.class);
-            intent.putExtra("nivelAtual", nivelAtual);  // Passa o nível novamente para a próxima atividade
             startActivity(intent);  // Inicia a próxima pergunta
         }, 3000);  // Aguarda 3 segundos
 
