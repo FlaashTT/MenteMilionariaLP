@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AtividadePerguntas extends AppCompatActivity {
     private BaseDadosLP BD_LP;
-    private TextView textoPergunta;
+    private TextView textoPergunta,textoDificuldade,textoPremio;
     private Button opcaoA, opcaoB, opcaoC, opcaoD, btnOpcao50_50, btnTrocaPergunta, btnOpcaoDesistir;
     private String respostaCorreta;
 
@@ -34,7 +34,8 @@ public class AtividadePerguntas extends AppCompatActivity {
             return insets;
         });
 
-
+        textoPremio = findViewById(R.id.textViewPremio);
+        textoDificuldade = findViewById(R.id.textViewDificuldade);
         textoPergunta = findViewById(R.id.textViewPergunta);
         opcaoA = findViewById(R.id.btnOpcaoA);
         opcaoB = findViewById(R.id.btnOpcaoB);
@@ -44,8 +45,6 @@ public class AtividadePerguntas extends AppCompatActivity {
         btnOpcao50_50 = findViewById(R.id.btnOpcao50_50);
         btnTrocaPergunta = findViewById(R.id.btnOpcaoTrocaPergunta);
         btnOpcaoDesistir = findViewById(R.id.btnOpcaoDesistir);
-
-
 
         // Iniciar Base de Dados
         BD_LP = new BaseDadosLP(this);
@@ -102,25 +101,60 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
     }
+    private int mostrarPremio(int nivel) {
+        int premio;
+
+        switch (nivel) {
+            case 0:premio = 0;break;
+            case 1:premio = 500;break;
+            case 2:premio = 1500;break;
+            case 3:premio = 2500;break;
+            case 4:premio = 3500;break;
+            case 5:premio = 4500;break;
+            case 6:premio = 6000;break;
+            case 7:premio = 7000;break;
+            case 8:premio = 10000;break;
+            case 9:premio = 12500;break;
+            case 10:premio = 15000;break;
+            case 11:premio = 25000;break;
+            case 12:premio = 50000;break;
+            case 13:premio = 250000;break;
+            case 14:premio = 500000;break;
+            case 15:premio = 1000000;break;
+            default:premio = 0; // Caso o nível seja inválido
+        }
+
+
+        textoPremio.setText("total ganho "+premio + "€");
+        return premio;
+    }
+
 
     private void carregarPergunta() {
 
+        mostrarPremio(nivelAtual);
         String dificuldade;
 
-        if (nivelAtual > 10) {
+        // Incrementa o nível após carregar a pergunta
+        Log.d("AtividadePerguntas", "Nivel antes da dificuldade  " + nivelAtual);
+
+
+
+        if (nivelAtual >= 11) {
             dificuldade = "dificil";
-        } else if (nivelAtual > 5 && nivelAtual <= 10) {
+        } else if (nivelAtual >= 5 && nivelAtual <=10) {
             dificuldade = "médio";
         } else {
             dificuldade = "fácil";
+
         }
-        Log.d("AtividadePerguntas", "nivel no o carregar: "+nivelAtual);
+        textoDificuldade.setText("Nivel-"+nivelAtual+" | Modo "+dificuldade);
+
 
         Cursor resultadoColuna = BD_LP.obterPerguntaAleatoria(dificuldade);
 
         if (resultadoColuna != null && resultadoColuna.moveToFirst()) {
             String pergunta;
-
 
             int id = resultadoColuna.getInt(resultadoColuna.getColumnIndexOrThrow("id"));
             BD_LP.adicionarVisualizada(id);
@@ -145,21 +179,21 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private void verificarResposta(String respostaEscolhida) {
         if (respostaEscolhida.equals(respostaCorreta)) {
-            // Incrementar o nível
-            nivelAtual++;
 
+            Log.d("AtividadePerguntas", "antes de fechar " + nivelAtual);
+            nivelAtual++;
+            Log.d("AtividadePerguntas", "depois de fechar " + nivelAtual);
             // Verificar se o nível atingiu ou superou 5
-            if (nivelAtual >= 5) {
+            /*if (nivelAtual == 15) {
                 // Se o nível for 5 ou mais, redireciona para a AtividadeStatus
-                Intent intent = new Intent(AtividadePerguntas.this, AtividadeStatus.class);
+                Intent intent = new Intent(AtividadePerguntas.this, AtividadeFim.class);
                 startActivity(intent);
-            } else {
-                // Caso o nível ainda não seja 5, carrega a próxima pergunta
-                carregarPergunta();
-            }
+            } */
+
+            carregarPergunta();
         } else {
             // Se a resposta estiver errada, reseta a visualização
-            BD_LP.resetarVisualizada();
+           //BD_LP.resetarVisualizada();
         }
     }
 
