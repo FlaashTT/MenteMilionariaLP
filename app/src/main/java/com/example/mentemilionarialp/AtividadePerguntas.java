@@ -10,6 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -72,8 +73,6 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
 
-
-
         // Ajuda 50_50
 
         btnOpcao50_50.setOnClickListener(new View.OnClickListener() {
@@ -83,19 +82,19 @@ public class AtividadePerguntas extends AppCompatActivity {
             }
         });
 
-        // Trocar Pergunta
+        // Desistir
+        btnOpcaoDesistir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpcaoDesistir();
+            }
+        });
+
+        // Troca Pergunta
         btnTrocaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TrocaPergunta();
-            }
-        });
-
-        // Desistir Pergunta
-        btnTrocaPergunta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpcaoDesistir();
             }
         });
 
@@ -132,6 +131,12 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private void carregarPergunta() {
 
+        // Certifique-se de que todas as opções estão visíveis
+        opcaoA.setVisibility(View.VISIBLE);
+        opcaoB.setVisibility(View.VISIBLE);
+        opcaoC.setVisibility(View.VISIBLE);
+        opcaoD.setVisibility(View.VISIBLE);
+
         mostrarPremio(nivelAtual);
         String dificuldade;
 
@@ -140,9 +145,9 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
 
-        if (nivelAtual >= 11) {
+        if (nivelAtual > 10) {
             dificuldade = "dificil";
-        } else if (nivelAtual >= 5 && nivelAtual <=10) {
+        } else if (nivelAtual > 5 && nivelAtual <=10) {
             dificuldade = "médio";
         } else {
             dificuldade = "fácil";
@@ -184,16 +189,38 @@ public class AtividadePerguntas extends AppCompatActivity {
             nivelAtual++;
             Log.d("AtividadePerguntas", "depois de fechar " + nivelAtual);
             // Verificar se o nível atingiu ou superou 5
-            /*if (nivelAtual == 15) {
+            if (nivelAtual == 15) {
                 // Se o nível for 5 ou mais, redireciona para a AtividadeStatus
-                Intent intent = new Intent(AtividadePerguntas.this, AtividadeFim.class);
+                Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
                 startActivity(intent);
-            } */
+            }
+
+            if(nivelAtual == 5 || nivelAtual == 10){
+                    // Cria o construtor do AlertDialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                    // Define o título do pop-up
+                    builder.setTitle("Informação");
+
+                    // Define a mensagem do pop-up com os detalhes do utilizador
+                    builder.setMessage("Caso perca nas proximas perguntas o seu valor final sera de "
+                            +mostrarPremio(nivelAtual));
+
+                    // Adiciona o botão "OK" para fechar o pop-up
+                    builder.setPositiveButton("OK", (dialog, which) -> {
+
+                    });
+
+                    // Cria e exibe o AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+            }
 
             carregarPergunta();
         } else {
-            // Se a resposta estiver errada, reseta a visualização
-           //BD_LP.resetarVisualizada();
+            Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
+            startActivity(intent);
         }
     }
 
@@ -201,14 +228,35 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
     private void Opcao50_50() {
+        // Verifica as respostas exibidas e oculta duas erradas
+        if (!opcaoA.getText().toString().equals(respostaCorreta)) {
+            opcaoA.setVisibility(View.INVISIBLE);
+        }
 
+        if (!opcaoB.getText().toString().equals(respostaCorreta)) {
+            opcaoB.setVisibility(View.INVISIBLE);
+        }
+
+        // Oculta apenas mais uma opção incorreta
+        if (!opcaoC.getText().toString().equals(respostaCorreta) && opcaoA.getVisibility() == View.VISIBLE) {
+            opcaoC.setVisibility(View.INVISIBLE);
+        } else if (!opcaoD.getText().toString().equals(respostaCorreta) && opcaoB.getVisibility() == View.VISIBLE) {
+            opcaoD.setVisibility(View.INVISIBLE);
+        }
+
+        // Desativa o botão "50/50" para que ele não seja usado novamente
+        btnOpcao50_50.setEnabled(false);
     }
 
     private void TrocaPergunta() {
+        carregarPergunta();
 
+        // Desativa o botão "50/50" para que ele não seja usado novamente
+        btnTrocaPergunta.setEnabled(false);
     }
 
     private void OpcaoDesistir() {
-
+        Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
+        startActivity(intent);
     }
 }
