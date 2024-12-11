@@ -271,11 +271,6 @@ public class AtividadePerguntas extends AppCompatActivity {
             return false; // Resposta errada
         }
     }
-
-
-
-
-
     private void Opcao50_50() {
         // Verifica as respostas exibidas e oculta duas erradas
         if (!opcaoA.getText().toString().equals(respostaCorreta)) {
