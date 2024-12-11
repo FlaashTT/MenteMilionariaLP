@@ -32,10 +32,9 @@ public class BaseDadosLP extends SQLiteOpenHelper {
                 "VALUES ('Quantos meses tem um ano?', '12', '10', '11', '13', '12', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual animal é conhecido como o rei da selva?', 'Leão', 'Tigre', 'Cervo', 'Elefante', 'Leão', 'fácil',0)");
+                "VALUES ('Qual é a capital de Portugal?', 'Lisboa', 'Lisboa', 'Porto', 'Portugal', 'Leiria', 'fácil',0)");
 
-        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é a capital do Brasil?', 'Brasília', 'São Paulo', 'Rio de Janeiro', 'Brasília', 'Salvador', 'fácil',0)");
+
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Qual é o nome da primeira letra do alfabeto?', 'A', 'B', 'C', 'A', 'D', 'fácil',0)");

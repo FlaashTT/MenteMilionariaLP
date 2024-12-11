@@ -2,7 +2,10 @@ package com.example.mentemilionarialp;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.sql.Time;
 
 public class AtividadePerguntas extends AppCompatActivity {
     private BaseDadosLP BD_LP;
@@ -62,7 +67,21 @@ public class AtividadePerguntas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Button botao = (Button) v;
-                verificarResposta(botao.getText().toString());
+
+
+                new CountDownTimer(1000, 1000) { // 10000 ms = 10 segundos, 1000 ms = intervalo de 1 segundo
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        botao.setBackgroundColor(Color.rgb(246, 179, 7));
+                    }
+
+                    @Override
+                    public void onFinish() {
+                       verificarResposta(botao.getText().toString());
+                    }
+                }.start();
+
+
             }
         };
 
@@ -131,6 +150,10 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
     private void carregarPergunta() {
+        opcaoA.setBackgroundColor(Color.BLUE);
+        opcaoB.setBackgroundColor(Color.BLUE);
+        opcaoC.setBackgroundColor(Color.BLUE);
+        opcaoD.setBackgroundColor(Color.BLUE);
 
         // Certifique-se de que todas as opções estão visíveis
         opcaoA.setVisibility(View.VISIBLE);
@@ -185,11 +208,14 @@ public class AtividadePerguntas extends AppCompatActivity {
     }
 
     private void verificarResposta(String respostaEscolhida) {
+
+
         if (respostaEscolhida.equals(respostaCorreta)) {
             Log.d("AtividadePerguntas", "nivel " + nivelAtual);
             nivelAtual++;
 
-            // Verificar se o nível atingiu 15
+
+            // Verificar se o nível atingiu 15,nivel maximo
             if (nivelAtual == 15) {
                 proseguir();
                 return;
@@ -241,9 +267,9 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private void proseguir(){
         int valorFinal;
-        if (nivelAtual>10){
+        if (nivelAtual >= 10){
              valorFinal = mostrarPremio(10);
-        } else if(nivelAtual >=5 && nivelAtual < 10) {
+        } else if(nivelAtual >= 5 ) {
              valorFinal = mostrarPremio(5);
         }else {
              valorFinal = 0;
