@@ -215,6 +215,7 @@ public class AtividadePerguntas extends AppCompatActivity {
             nivelAtual++;
 
 
+
             // Verificar se o nível atingiu 15,nivel maximo
             if (nivelAtual == 15) {
                 proseguir();
