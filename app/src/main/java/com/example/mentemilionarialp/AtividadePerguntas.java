@@ -30,6 +30,8 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private int nivelAtual;
 
+    private Button botaoCorreto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class AtividadePerguntas extends AppCompatActivity {
         // Iniciar Base de Dados
         BD_LP = new BaseDadosLP(this);
 
-        //Reset
+        //Resetar as perguguntas para nao visualizadas
         BD_LP.resetarVisualizada();
 
         // Simular Pergunta
@@ -69,7 +71,7 @@ public class AtividadePerguntas extends AppCompatActivity {
                 Button botao = (Button) v;
 
 
-                new CountDownTimer(1000, 1000) { // 10000 ms = 10 segundos, 1000 ms = intervalo de 1 segundo
+                new CountDownTimer(1000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         botao.setBackgroundColor(Color.rgb(246, 179, 7));
@@ -77,7 +79,35 @@ public class AtividadePerguntas extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
-                       verificarResposta(botao.getText().toString());
+
+                        //counter para trocar a cor de amarelo para verde ou para vermelho
+                        new CountDownTimer(1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+
+                                if(verificarResposta(botao.getText().toString())){
+                                    botao.setBackgroundColor(Color.GREEN);
+                                }else{
+                                    botao.setBackgroundColor(Color.RED);
+                                    botaoCorreto.setBackgroundColor(Color.GREEN);
+
+                                }
+                            }
+
+                            @Override
+                            public void onFinish() {
+
+                                if(verificarResposta(botao.getText().toString())){
+                                    carregarPergunta();
+                                }else {
+                                    proseguir();
+
+                                }
+
+                            }
+                        }.start();
+
+
                     }
                 }.start();
 
@@ -198,6 +228,18 @@ public class AtividadePerguntas extends AppCompatActivity {
             opcaoB.setText(resultadoColuna.getString(resultadoColuna.getColumnIndexOrThrow("resposta_2")));
             opcaoC.setText(resultadoColuna.getString(resultadoColuna.getColumnIndexOrThrow("resposta_3")));
             opcaoD.setText(resultadoColuna.getString(resultadoColuna.getColumnIndexOrThrow("resposta_4")));
+
+            //condiçao qual botao tem a resposta correta
+            if (opcaoA.getText().toString().equals(respostaCorreta)) {
+                botaoCorreto = opcaoA;
+            } else if (opcaoB.getText().toString().equals(respostaCorreta)) {
+                botaoCorreto = opcaoB;
+            } else if (opcaoC.getText().toString().equals(respostaCorreta)) {
+                botaoCorreto = opcaoC;
+            } else if (opcaoD.getText().toString().equals(respostaCorreta)) {
+                botaoCorreto = opcaoD;
+            }
+
             textoPergunta.setText(pergunta);
 
 
@@ -207,19 +249,15 @@ public class AtividadePerguntas extends AppCompatActivity {
         }
     }
 
-    private void verificarResposta(String respostaEscolhida) {
-
-
+    private boolean verificarResposta(String respostaEscolhida) {
         if (respostaEscolhida.equals(respostaCorreta)) {
             Log.d("AtividadePerguntas", "nivel " + nivelAtual);
             nivelAtual++;
 
-
-
-            // Verificar se o nível atingiu 15,nivel maximo
+            // Verificar se o nível atingiu o nível máximo
             if (nivelAtual == 15) {
                 proseguir();
-                return;
+                return true;
             }
 
             // Exibir mensagem especial nos níveis 5 e 10
@@ -227,9 +265,10 @@ public class AtividadePerguntas extends AppCompatActivity {
                 Toast.makeText(this, "Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual), Toast.LENGTH_LONG).show();
             }
 
-            carregarPergunta();
+
+            return true; // Resposta correta
         } else {
-            proseguir();
+            return false; // Resposta errada
         }
     }
 
@@ -269,16 +308,16 @@ public class AtividadePerguntas extends AppCompatActivity {
     private void proseguir(){
         int valorFinal;
         if (nivelAtual >= 10){
-             valorFinal = mostrarPremio(10);
+            valorFinal = mostrarPremio(10);
         } else if(nivelAtual >= 5 ) {
-             valorFinal = mostrarPremio(5);
+            valorFinal = mostrarPremio(5);
         }else {
-             valorFinal = 0;
+            valorFinal = 0;
         }
 
         Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
         intent.putExtra("ValorTotalGanho", String.valueOf(valorFinal));
-        intent.putExtra("RondasJogadas", String.valueOf(nivelAtual));   
+        intent.putExtra("RondasJogadas", String.valueOf(nivelAtual));
         startActivity(intent);
 
     }
