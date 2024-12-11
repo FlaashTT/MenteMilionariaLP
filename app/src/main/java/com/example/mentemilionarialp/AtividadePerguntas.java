@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -86,7 +87,7 @@ public class AtividadePerguntas extends AppCompatActivity {
         btnOpcaoDesistir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OpcaoDesistir();
+                proseguir();
             }
         });
 
@@ -145,14 +146,15 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
 
+
         if (nivelAtual > 10) {
-            dificuldade = "dificil";
-        } else if (nivelAtual > 5 && nivelAtual <=10) {
+            dificuldade = "difícil";
+        } else if (nivelAtual > 5) {
             dificuldade = "médio";
         } else {
             dificuldade = "fácil";
-
         }
+
         textoDificuldade.setText("Nivel-"+nivelAtual+" | Modo "+dificuldade);
 
 
@@ -184,45 +186,26 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private void verificarResposta(String respostaEscolhida) {
         if (respostaEscolhida.equals(respostaCorreta)) {
-
-            Log.d("AtividadePerguntas", "antes de fechar " + nivelAtual);
+            Log.d("AtividadePerguntas", "nivel " + nivelAtual);
             nivelAtual++;
-            Log.d("AtividadePerguntas", "depois de fechar " + nivelAtual);
-            // Verificar se o nível atingiu ou superou 5
+
+            // Verificar se o nível atingiu 15
             if (nivelAtual == 15) {
-                // Se o nível for 5 ou mais, redireciona para a AtividadeStatus
-                Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
-                startActivity(intent);
+                proseguir();
+                return;
             }
 
-            if(nivelAtual == 5 || nivelAtual == 10){
-                    // Cria o construtor do AlertDialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                    // Define o título do pop-up
-                    builder.setTitle("Informação");
-
-                    // Define a mensagem do pop-up com os detalhes do utilizador
-                    builder.setMessage("Caso perca nas proximas perguntas o seu valor final sera de "
-                            +mostrarPremio(nivelAtual));
-
-                    // Adiciona o botão "OK" para fechar o pop-up
-                    builder.setPositiveButton("OK", (dialog, which) -> {
-
-                    });
-
-                    // Cria e exibe o AlertDialog
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
+            // Exibir mensagem especial nos níveis 5 e 10
+            if (nivelAtual == 5 || nivelAtual == 10) {
+                Toast.makeText(this, "Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual), Toast.LENGTH_LONG).show();
             }
 
             carregarPergunta();
         } else {
-            Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
-            startActivity(intent);
+            proseguir();
         }
     }
+
 
 
 
@@ -255,8 +238,21 @@ public class AtividadePerguntas extends AppCompatActivity {
         btnTrocaPergunta.setEnabled(false);
     }
 
-    private void OpcaoDesistir() {
+
+    private void proseguir(){
+        int valorFinal;
+        if (nivelAtual>10){
+             valorFinal = mostrarPremio(10);
+        } else if(nivelAtual >=5 && nivelAtual < 10) {
+             valorFinal = mostrarPremio(5);
+        }else {
+             valorFinal = 0;
+        }
+
         Intent intent = new Intent(AtividadePerguntas.this, AtividadeFinal.class);
+        intent.putExtra("ValorTotalGanho", String.valueOf(valorFinal));
+        intent.putExtra("RondasJogadas", String.valueOf(nivelAtual));   
         startActivity(intent);
+
     }
 }

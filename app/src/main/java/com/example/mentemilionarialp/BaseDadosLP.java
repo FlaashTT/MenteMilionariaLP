@@ -29,10 +29,10 @@ public class BaseDadosLP extends SQLiteOpenHelper {
                 "visualizada INTEGER DEFAULT 0) ");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quantos meses tem um ano?', '12', '10', '11', '12', '13', 'fácil',0)");
+                "VALUES ('Quantos meses tem um ano?', '12', '10', '11', '13', '12', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual animal é conhecido como o rei da selva?', 'Leão', 'Tigre', 'Leão', 'Elefante', 'Cervo', 'fácil',0)");
+                "VALUES ('Qual animal é conhecido como o rei da selva?', 'Leão', 'Tigre', 'Cervo', 'Elefante', 'Leão', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Qual é a capital do Brasil?', 'Brasília', 'São Paulo', 'Rio de Janeiro', 'Brasília', 'Salvador', 'fácil',0)");
@@ -42,6 +42,12 @@ public class BaseDadosLP extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Quantos continentes existem no planeta Terra?', '7', '5', '7', '6', '8', 'fácil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Quanto é 2+2', '4', '2', '4', '7', '8', 'fácil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual a estação do ano mais quente', 'Verão', 'outono', 'inverno', 'Verão', 'primavera', 'fácil',0)");
 
 
 
@@ -62,6 +68,12 @@ public class BaseDadosLP extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Quem escreveu \"Dom Quixote\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Miguel de Cervantes', 'Jorge Luis Borges', 'Mario Vargas Llosa', 'médio',0)");
 
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o nome da sereia no filme A pequena sereia', 'Ariel', 'ana', 'rogeria', 'transmontana', 'Ariel', 'médio',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual a raiz quadrada de 4', '2', '4', 'raiz quadrada de 4', '2', '8', 'médio',0)");
+
 
 
 
@@ -79,7 +91,14 @@ public class BaseDadosLP extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Qual é o nome do maior deserto do mundo?', 'Deserto da Antártida', 'Deserto do Saara', 'Deserto da Antártida', 'Deserto da Arábia', 'Deserto de Gobi', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o nome do filho do napoleao', 'Nao sei ', 'dartacao', 'jeremias', 'Antonieta', 'Nao sei', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o primeiro foguete a chegar ha lua', 'saturno V', 'Elon Musk', 'Apolo I', 'saturno V', 'Tom cruz', 'difícil',0)");
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

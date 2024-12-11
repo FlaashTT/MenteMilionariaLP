@@ -2,8 +2,10 @@ package com.example.mentemilionarialp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AtividadeFinal extends AppCompatActivity {
+
+
+
     private Button jogarNovamente, jogarInicio;
+
+    private TextView ValorGanho,RondasJogadas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +32,21 @@ public class AtividadeFinal extends AppCompatActivity {
             return insets;
         });
 
+        Bundle extras = getIntent().getExtras();
+        String valorGanho = extras.getString("ValorTotalGanho", "0"); // Valor padrão se null
+        String rondaJogadas = extras.getString("RondasJogadas", "0"); // Valor padrão se null
+
+        Log.d("AtividadeFinal", "Valor Total Ganho: " + valorGanho);
+        Log.d("AtividadeFinal", "Rondas Jogadas: " + rondaJogadas);
+
+        ValorGanho = findViewById(R.id.textViewValorGanho);
+        RondasJogadas = findViewById(R.id.textViewRondasJogadas);
         jogarNovamente = findViewById(R.id.btnJogarNovamente);
         jogarInicio = findViewById(R.id.btnInicio);
+
+
+        ValorGanho.setText(""+valorGanho);
+        RondasJogadas.setText(""+rondaJogadas);
 
         jogarNovamente.setOnClickListener(new View.OnClickListener() {
             @Override
