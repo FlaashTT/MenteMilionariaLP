@@ -90,6 +90,7 @@ public class AtividadePerguntas extends AppCompatActivity {
                             @Override
                             public void onFinish() {
                                 if(verificarResposta(botao.getText().toString())){
+                                    nivelAtual++;
                                     carregarPergunta();
                                 }else {
                                     proseguir();
@@ -235,7 +236,7 @@ public class AtividadePerguntas extends AppCompatActivity {
     private boolean verificarResposta(String respostaEscolhida) {
         if (respostaEscolhida.equals(respostaCorreta)) {
             Log.d("AtividadePerguntas", "nivel " + nivelAtual);
-            nivelAtual++;
+
             // Verificar se o nível atingiu o nível máximo
             if (nivelAtual == 15) {
                 proseguir();
