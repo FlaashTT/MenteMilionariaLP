@@ -27,7 +27,6 @@ public class AtividadePerguntas extends AppCompatActivity {
     private TextView textoPergunta,textoDificuldade,textoPremio;
     private Button opcaoA, opcaoB, opcaoC, opcaoD, btnOpcao50_50, btnTrocaPergunta, btnOpcaoDesistir;
     private String respostaCorreta;
-
     private int nivelAtual;
 
     private Button botaoCorreto;
@@ -70,44 +69,33 @@ public class AtividadePerguntas extends AppCompatActivity {
             public void onClick(View v) {
                 Button botao = (Button) v;
 
-
                 new CountDownTimer(1000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         botao.setBackgroundColor(Color.rgb(246, 179, 7));
                     }
-
                     @Override
                     public void onFinish() {
-
                         //counter para trocar a cor de amarelo para verde ou para vermelho
                         new CountDownTimer(1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
-
                                 if(verificarResposta(botao.getText().toString())){
                                     botao.setBackgroundColor(Color.GREEN);
                                 }else{
                                     botao.setBackgroundColor(Color.RED);
                                     botaoCorreto.setBackgroundColor(Color.GREEN);
-
                                 }
                             }
-
                             @Override
                             public void onFinish() {
-
                                 if(verificarResposta(botao.getText().toString())){
                                     carregarPergunta();
                                 }else {
                                     proseguir();
-
                                 }
-
                             }
                         }.start();
-
-
                     }
                 }.start();
 
@@ -239,13 +227,8 @@ public class AtividadePerguntas extends AppCompatActivity {
             } else if (opcaoD.getText().toString().equals(respostaCorreta)) {
                 botaoCorreto = opcaoD;
             }
-
             textoPergunta.setText(pergunta);
-
-
-
             resultadoColuna.close();
-
         }
     }
 
@@ -253,7 +236,6 @@ public class AtividadePerguntas extends AppCompatActivity {
         if (respostaEscolhida.equals(respostaCorreta)) {
             Log.d("AtividadePerguntas", "nivel " + nivelAtual);
             nivelAtual++;
-
             // Verificar se o nível atingiu o nível máximo
             if (nivelAtual == 15) {
                 proseguir();
@@ -264,8 +246,6 @@ public class AtividadePerguntas extends AppCompatActivity {
             if (nivelAtual == 5 || nivelAtual == 10) {
                 Toast.makeText(this, "Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual), Toast.LENGTH_LONG).show();
             }
-
-
             return true; // Resposta correta
         } else {
             return false; // Resposta errada
