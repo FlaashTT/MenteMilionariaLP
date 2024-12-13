@@ -59,9 +59,9 @@
 
         <TextView
             android:id="@+id/textViewPergunta"
-            android:layout_width="332dp"
-            android:layout_height="61dp"
-            android:layout_marginTop="134dp"
+            android:layout_width="375dp"
+            android:layout_height="89dp"
+            android:layout_marginTop="115dp"
             android:text="Qual é a Capital de Portugal?"
             android:textColor="@color/white"
             android:textSize="25dp"
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="430dp"
+            android:layout_marginTop="420dp"
             android:text="Troca"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPremio" />
@@ -107,7 +107,7 @@
             android:id="@+id/btnOpcao50_50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="430dp"
+            android:layout_marginTop="420dp"
             android:layout_marginEnd="50dp"
             android:text="50 / 50"
             app:layout_constraintEnd_toEndOf="parent"
