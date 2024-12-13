@@ -28,62 +28,83 @@ public class BaseDadosLP extends SQLiteOpenHelper {
                 "dificuldade TEXT, " +
                 "visualizada INTEGER DEFAULT 0) ");
 
+        //faceis
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quantos meses tem um ano?', '12', '10', '11', '13', '12', 'fácil',0)");
-
-        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é a capital de Portugal?', 'Lisboa', 'Lisboa', 'Porto', 'Portugal', 'Leiria', 'fácil',0)");
-
-
+                "VALUES ('Qual destas palavras é sinonima de \"malandro\"', 'Gabiru', 'Aluado', 'Casmurro', 'Gabiru', 'Pelintra', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é o nome da primeira letra do alfabeto?', 'A', 'B', 'C', 'A', 'D', 'fácil',0)");
+                "VALUES ('Qual destes alimentos pode integrar uma dieta vegana?', 'Arroz', 'Queijo', 'Arroz', 'Salsichas', 'Salmão', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quantos continentes existem no planeta Terra?', '7', '5', '7', '6', '8', 'fácil',0)");
+                "VALUES ('Qual destes numeros é o unico numero que,alem de ser par é primo', 'Dois', 'Quatro', 'Dois', 'Seis', 'Oito', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quanto é 2+2', '4', '2', '4', '7', '8', 'fácil',0)");
+                "VALUES ('Em que ano se realizam os primeiros Jogos Olimpicos da era moderna?', '1896', '1968', '1896', '1972', '1907', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual a estação do ano mais quente', 'Verão', 'outono', 'inverno', 'Verão', 'primavera', 'fácil',0)");
-
-
-
-
+                "VALUES ('Os protagonistas da serie \"Os Simpsons\" são de cor', 'Amarela', 'Verde', 'Amarela', 'Azul', 'Rosa', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quem pintou a Mona Lisa?', 'Leonardo da Vinci', 'Vincent van Gogh', 'Pablo Picasso', 'Leonardo da Vinci', 'Claude Monet', 'médio',0)");
+                "VALUES ('Das seguintes opções qual pode ser considerado um deserto', 'Antártida', 'Antártida', 'Moscovo', 'Amazonia', 'Floresta Portuguesa', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é o maior país do mundo em área?', 'Rússia', 'Estados Unidos', 'China', 'Rússia', 'Canadá', 'médio',0)");
+                "VALUES ('Qual é o nome da famosa torre localizada em Paris?', 'Torre Eiffel', 'Torre de Belem', 'Torre de Londres', 'Torre Eiffel', 'Torre Torta', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é a fórmula química do metano?', 'CH4', 'CO2', 'CH4', 'C2H6', 'C3H8', 'médio',0)");
+                "VALUES ('Quem é o personagem \"Tom\" na famosa serie animada? ', 'Tom,o gato do Tom e jerry', 'Tom,o gato do Tom e mickey', 'Garfield', 'Tom,o gato do Tom e jerry', 'Mickey', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é o elemento químico que tem o símbolo O?', 'Oxigênio', 'Osmium', 'Oxigênio', 'Ouro', 'Oganessônio', 'médio',0)");
+                "VALUES ('Qual destes instrumentos não é um instrumento de sopro? ', 'Violão', 'Flauta', 'Trompete', 'Saxofone', 'Violão', 'fácil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quem escreveu \"Dom Quixote\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Miguel de Cervantes', 'Jorge Luis Borges', 'Mario Vargas Llosa', 'médio',0)");
+                "VALUES ('Qual o famoso brinquedo que é montado com peças coloridas e encaixaveis?', 'Lego', 'Domino', 'Lego', 'Pipa', 'Quebra-cabeça', 'fácil',0)");
+
+
+
+
+//medias
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual das seguintes opções nõo é uma linguagem de programação', 'HTML', 'Lua', 'HTML', 'GO', 'Cypher', 'intermedio',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual o nome da sereia no filme A pequena sereia', 'Ariel', 'ana', 'rogeria', 'transmontana', 'Ariel', 'médio',0)");
+                "VALUES ('O numero PI é usado para calcular a area de qual destas figuras geometricas', 'Circulo', 'Retangulo', 'Circulo', 'Quadrado', 'Triangulo', 'intermedio',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual a raiz quadrada de 4', '2', '4', 'raiz quadrada de 4', '2', '8', 'médio',0)");
-
-
-
+                "VALUES ('Qual é a fórmula química do metano?', 'CH4', 'CO2', 'CH4', 'C2H6', 'C3H8', 'intermedio',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é a teoria que descreve a origem do universo?', 'Big Bang', 'Teoria da Relatividade', 'Big Bang', 'Teoria das Cordas', 'Teoria Quântica', 'difícil',0)");
+                "VALUES ('As Luminarias de São José são uma tradição de que conselho do distrito de Leiria', 'Bombarral', 'Alcobaça', 'Bombarral', 'Pombal', 'Porto de Mós', 'intermedio',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual é o nome da partícula subatômica descoberta por Peter Higgs?', 'Bóson de Higgs', 'Bóson de W', 'Neutrino', 'Bóson de Higgs', 'Quark Top', 'difícil',0)");
+                "VALUES ('Quem escreveu \"Dom Quixote\"?', 'Miguel de Cervantes', 'Gabriel García Márquez', 'Miguel de Cervantes', 'Jorge Luis Borges', 'Mario Vargas Llosa', 'intermedio',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Quem propôs a teoria da relatividade?', 'Albert Einstein', 'Isaac Newton', 'Albert Einstein', 'Niels Bohr', 'Galileo Galilei', 'difícil',0)");
+                "VALUES ('Que seleção de Futebol é apelidada de \"Três Leões\"? ', 'Inglaterra', 'Espanha', 'Inglaterra', 'Sporting', 'PSG', 'intermedio',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Quem é o autor da obra \"O princepe\"', 'Nicolau Maquiavel', 'Platão', 'Aristóteles', 'Nicolau Maquiavel', 'Jean-Jacques Rousseau', 'intermedio',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o pais conhecido como \"Terra do sol Nascente\"?', 'Japão', 'Japão', 'Tailandia', 'China', 'Coreia do Sul', 'intermedio',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o maior Oceano do Planeta Terra', 'Oceano Pacifico', 'Oceano Artico', 'Oceano Indico', 'Oceano Pacifico', 'Oceano Atalântico', 'intermedio',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual o nome da escola de magia onde Harry Potter estuda ', 'Hogwarts', 'Ilvermorny', 'Durmstrang', 'Hogwarts', 'Beauxbatons', 'intermedio',0)");
+
+
+
+//dificeis
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Que nome se dava aos Pescadores que no inverno migravam para pescar no rio Tejo', 'Avieiros', 'Avieiros', 'Cabaneiros', 'Esparregueiros', 'Ratinhos', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('O album \"The Guitar Trio\" de 1996,junta Al Di Meola,John McLaughlin e...', 'Paco de Lucia ', 'Carlos Santana', 'Paco de Lucia', 'Manolo Sanlúcar', 'Vicente Amigo', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Em que ano foi descoberto o bosão de Higgs, tambem apelidado de \" particula de Deus\"?', '2012', '1978', '2012', '1912', '1887', 'difícil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
                 "VALUES ('Em que ano ocorreu a Revolução Francesa?', '1789', '1799', '1789', '1800', '1776', 'difícil',0)");
@@ -92,10 +113,19 @@ public class BaseDadosLP extends SQLiteOpenHelper {
                 "VALUES ('Qual é o nome do maior deserto do mundo?', 'Deserto da Antártida', 'Deserto do Saara', 'Deserto da Antártida', 'Deserto da Arábia', 'Deserto de Gobi', 'difícil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual o nome do filho do napoleao', 'Nao sei ', 'dartacao', 'jeremias', 'Antonieta', 'Nao sei', 'difícil',0)");
+                "VALUES ('Qual o nome da primeira obra de José Saramago', 'Terra do Pecado ', 'Memorial do Convento', 'Terra do Pecado', 'Ensaio sobre a Cegueira', 'A Jangada de Pedra', 'difícil',0)");
 
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
-                "VALUES ('Qual o primeiro foguete a chegar ha lua', 'saturno V', 'Elon Musk', 'Apolo I', 'saturno V', 'Tom cruz', 'difícil',0)");
+                "VALUES ('Qual o primeiro foguete a chegar ha lua', 'saturno V', 'Elon Musk', 'Apolo I', 'saturno V', 'Redstone', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual é a teoria que descreve a origem do universo?', 'Big Bang', 'Teoria da Relatividade', 'Big Bang', 'Teoria das Cordas', 'Teoria Quântica', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual é o nome da partícula subatômica descoberta por Peter Higgs?', 'Bóson de Higgs', 'Bóson de W', 'Neutrino', 'Bóson de Higgs', 'Quark Top', 'difícil',0)");
+
+        db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
+                "VALUES ('Qual destes Reis fez parte da dinastia brigantina', 'D.João V', 'D.João II', 'D.João V', 'D.Afonso Henriques', 'Dom Manuel I', 'difícil',0)");
     }
 
 

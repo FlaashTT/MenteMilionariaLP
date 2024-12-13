@@ -27,7 +27,7 @@ public class AtividadePerguntas extends AppCompatActivity {
     private TextView textoPergunta,textoDificuldade,textoPremio;
     private Button opcaoA, opcaoB, opcaoC, opcaoD, btnOpcao50_50, btnTrocaPergunta, btnOpcaoDesistir;
     private String respostaCorreta;
-    private int nivelAtual;
+    private int nivelAtual = 1;
 
     private Button botaoCorreto;
 
@@ -90,8 +90,23 @@ public class AtividadePerguntas extends AppCompatActivity {
                             @Override
                             public void onFinish() {
                                 if(verificarResposta(botao.getText().toString())){
-                                    nivelAtual++;
-                                    carregarPergunta();
+
+                                    // Exibir mensagem especial nos níveis 5 e 10
+                                    if (nivelAtual == 5 || nivelAtual == 10) {
+                                        new AlertDialog.Builder(AtividadePerguntas.this)
+                                                .setTitle("Informação")
+                                                .setMessage("Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual))
+                                                .setPositiveButton("OK", (dialog, which) -> {
+                                                    nivelAtual++;
+                                                    carregarPergunta();
+                                                    dialog.dismiss();
+                                                })
+                                                .show();
+                                    }else {
+                                        nivelAtual++;
+                                        carregarPergunta();
+                                    }
+
                                 }else {
                                     proseguir();
                                 }
@@ -143,8 +158,7 @@ public class AtividadePerguntas extends AppCompatActivity {
         int premio;
 
         switch (nivel) {
-            case 0:premio = 0;break;
-            case 1:premio = 500;break;
+            case 1:premio = 0;break;
             case 2:premio = 1500;break;
             case 3:premio = 2500;break;
             case 4:premio = 3500;break;
@@ -192,7 +206,7 @@ public class AtividadePerguntas extends AppCompatActivity {
         if (nivelAtual > 10) {
             dificuldade = "difícil";
         } else if (nivelAtual > 5) {
-            dificuldade = "médio";
+            dificuldade = "intermedio";
         } else {
             dificuldade = "fácil";
         }
@@ -243,10 +257,8 @@ public class AtividadePerguntas extends AppCompatActivity {
                 return true;
             }
 
-            // Exibir mensagem especial nos níveis 5 e 10
-            if (nivelAtual == 5 || nivelAtual == 10) {
-                Toast.makeText(this, "Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual), Toast.LENGTH_LONG).show();
-            }
+
+
             return true; // Resposta correta
         } else {
             return false; // Resposta errada
