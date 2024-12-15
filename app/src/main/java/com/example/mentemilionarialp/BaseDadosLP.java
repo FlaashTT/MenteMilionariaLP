@@ -10,6 +10,16 @@ public class BaseDadosLP extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "basedadoslp.db";
     private static final int DATABASE_VERSION = 1;
+    private static final String PERGUNTAS = "CREATE TABLE perguntas (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "pergunta TEXT, " +
+                    "resposta_correta TEXT, " +
+                    "resposta_1 TEXT, " +
+                    "resposta_2 TEXT, " +
+                    "resposta_3 TEXT, " +
+                    "resposta_4 TEXT, " +
+                    "dificuldade TEXT, " +
+                    "visualizada INTEGER DEFAULT 0)";
 
     public BaseDadosLP(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -17,16 +27,8 @@ public class BaseDadosLP extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE perguntas (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "pergunta TEXT, " +
-                "resposta_correta TEXT, " +
-                "resposta_1 TEXT, " +
-                "resposta_2 TEXT, " +
-                "resposta_3 TEXT, " +
-                "resposta_4 TEXT, " +
-                "dificuldade TEXT, " +
-                "visualizada INTEGER DEFAULT 0) ");
+
+        db.execSQL(PERGUNTAS);
 
         //faceis
         db.execSQL("INSERT INTO perguntas (pergunta, resposta_correta, resposta_1, resposta_2, resposta_3, resposta_4, dificuldade,visualizada) " +
