@@ -69,6 +69,7 @@ public class AtividadePerguntas extends AppCompatActivity {
             public void onClick(View v) {
                 Button botao = (Button) v;
 
+                //para botao ficar amarelo apos seleciona
                 new CountDownTimer(1000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
@@ -80,9 +81,9 @@ public class AtividadePerguntas extends AppCompatActivity {
                         new CountDownTimer(1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
-                                if(verificarResposta(botao.getText().toString())){
+                                if(verificarResposta(botao.getText().toString())){//caso a resposta seja corrtea fica a verde
                                     botao.setBackgroundColor(Color.GREEN);
-                                }else{
+                                }else{//se tiver errada coloca a vermelho a errada e a verde a correta
                                     botao.setBackgroundColor(Color.RED);
                                     botaoCorreto.setBackgroundColor(Color.GREEN);
                                 }
@@ -94,7 +95,7 @@ public class AtividadePerguntas extends AppCompatActivity {
                                     // Exibir mensagem especial nos níveis 5 e 10
                                     if (nivelAtual == 5 || nivelAtual == 10) {
                                         new AlertDialog.Builder(AtividadePerguntas.this)
-                                                .setTitle("Informação")
+                                                .setTitle("Informação")//popUp a informar sobre os patamares de segurança
                                                 .setMessage("Caso perca nas próximas perguntas o seu valor final será de " + mostrarPremio(nivelAtual))
                                                 .setPositiveButton("OK", (dialog, which) -> {
                                                     nivelAtual++;
@@ -103,6 +104,7 @@ public class AtividadePerguntas extends AppCompatActivity {
                                                 })
                                                 .show();
                                     }else {
+                                        //passa á proxima pergunta
                                         nivelAtual++;
                                         carregarPergunta();
                                     }
@@ -128,7 +130,6 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
         // Ajuda 50_50
-
         btnOpcao50_50.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +145,7 @@ public class AtividadePerguntas extends AppCompatActivity {
             }
         });
 
-        // Troca Pergunta
+        // Trocar Pergunta
         btnTrocaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,6 +155,8 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
     }
+
+    //valor dos niveis
     private int mostrarPremio(int nivel) {
         int premio;
 
@@ -183,12 +186,12 @@ public class AtividadePerguntas extends AppCompatActivity {
 
 
     private void carregarPergunta() {
+
+        //Para todos os botoes de resposta estarem visiveis e com a mesma cor
         opcaoA.setBackgroundColor(Color.BLUE);
         opcaoB.setBackgroundColor(Color.BLUE);
         opcaoC.setBackgroundColor(Color.BLUE);
         opcaoD.setBackgroundColor(Color.BLUE);
-
-        // Certifique-se de que todas as opções estão visíveis
         opcaoA.setVisibility(View.VISIBLE);
         opcaoB.setVisibility(View.VISIBLE);
         opcaoC.setVisibility(View.VISIBLE);
@@ -197,12 +200,8 @@ public class AtividadePerguntas extends AppCompatActivity {
         mostrarPremio(nivelAtual);
         String dificuldade;
 
-        // Incrementa o nível após carregar a pergunta
-        Log.d("AtividadePerguntas", "Nivel antes da dificuldade  " + nivelAtual);
 
-
-
-
+        //condiçao para gerir a dificuldade
         if (nivelAtual > 10) {
             dificuldade = "difícil";
         } else if (nivelAtual > 5) {
@@ -213,15 +212,16 @@ public class AtividadePerguntas extends AppCompatActivity {
 
         textoDificuldade.setText("Nivel-"+nivelAtual+" | Modo "+dificuldade);
 
-
+        //para buscar uma pergunta aleatoria conforme a dificuldade
         Cursor resultadoColuna = BD_LP.obterPerguntaAleatoria(dificuldade);
 
         if (resultadoColuna != null && resultadoColuna.moveToFirst()) {
             String pergunta;
 
+            //para nao garantir que nao volta a repetir a mesma pergunta
             int id = resultadoColuna.getInt(resultadoColuna.getColumnIndexOrThrow("id"));
             BD_LP.adicionarVisualizada(id);
-            Log.d("BD_LP", "ID visualizada: " + id);
+
 
             pergunta = resultadoColuna.getString(resultadoColuna.getColumnIndexOrThrow("pergunta"));
             respostaCorreta = resultadoColuna.getString(resultadoColuna.getColumnIndexOrThrow("resposta_correta"));
@@ -256,16 +256,14 @@ public class AtividadePerguntas extends AppCompatActivity {
                 proseguir();
                 return true;
             }
-
-
-
             return true; // Resposta correta
         } else {
             return false; // Resposta errada
         }
     }
+
     private void Opcao50_50() {
-        // Verifica as respostas exibidas e oculta duas erradas
+        //remove duas opçoes incorretas
         if (!opcaoA.getText().toString().equals(respostaCorreta)) {
             opcaoA.setVisibility(View.INVISIBLE);
         }
@@ -287,12 +285,11 @@ public class AtividadePerguntas extends AppCompatActivity {
 
     private void TrocaPergunta() {
         carregarPergunta();
-
-        // Desativa o botão "50/50" para que ele não seja usado novamente
+        // Desativa o botão de troca para que ele não seja usado novamente
         btnTrocaPergunta.setEnabled(false);
     }
 
-
+    //gestor de final de jogo
     private void proseguir(){
         int valorFinal;
         if (nivelAtual >= 10){

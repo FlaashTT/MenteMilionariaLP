@@ -148,7 +148,7 @@ public class BaseDadosLP extends SQLiteOpenHelper {
     public void adicionarVisualizada(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE perguntas SET visualizada = 1 WHERE id = ?", new Object[]{id});
-        //Log.d("BaseDadosLP", "ID: " + id , "pergunta" + obterPerguntaAleatoria(id) );
+
     }
 
     public void resetarVisualizada(){
