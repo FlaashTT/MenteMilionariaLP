@@ -56,7 +56,6 @@ public class AtividadeFinal extends AppCompatActivity {
             }
         });
 
-        //para voltar ha pagina incial da aplicação
         jogarInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
